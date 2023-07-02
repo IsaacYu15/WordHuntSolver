@@ -2,10 +2,39 @@
 
 <html>
     <head>
-        <title>web</title>
+        <title>WORDLE SOLVER</title>
+        <link rel = "stylesheet" href = "style.css">
+
     </head>
     <body>
-        <script></script>
+        	 
+        <section id="header" >
+            <h2>WORDLE SOLVER</h2>
+        </section>
+
+        <section id ="inputGrids">
+            
+            <!--Create 16 input fields-->
+            <script>
+
+                for (let i = 0; i < 16; i ++) {
+                    var input = document.createElement("input");
+                    input.setAttribute('type', 'text');
+
+                    //append the created element to the desired parent element
+
+                    var parent = document.getElementById("inputGrids");
+                    parent.appendChild(input);
+                }
+
+            </script>
+
+        </section>
+        
+        <section id="userInput"> 
+            <button type ="button">SUBMIT</button>
+        </section>
+       
     </body>
 
 </html>

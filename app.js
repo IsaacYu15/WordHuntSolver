@@ -1,7 +1,5 @@
 
 const f = require('fs');
-const readline = require('readline');
-
 const GRID_SIZE = 4;
 const ALPHABET = [
     "a",
@@ -94,7 +92,7 @@ const solveGrid = (grid) => {
 
 const recursiveSearch = (xPos, yPos, grid, discoveredPaths) => {
 
-    
+    //search in every single possible direction that will not cause repeated path
     for (let i = 0; i < DIRECTION.length; i ++) {        
         const t_discovered = [...discoveredPaths];
 
@@ -105,7 +103,7 @@ const recursiveSearch = (xPos, yPos, grid, discoveredPaths) => {
 
             const position = newX + " " + newY;
 
-            if (!t_discovered.includes(position) && t_discovered.length < 6) {
+            if (!t_discovered.includes(position) && t_discovered.length < 6) { //a temporary limiter so it doesn't search too much
                 
                 t_discovered.push (position);
 
@@ -153,10 +151,8 @@ const fileToArr = () => {
 };
 
 const DICTIONARY = fileToArr();
-
 const grid = initGrid(GRID_SIZE);
 printGrid(grid);
-
 console.log ("---------");
 solveGrid(grid);
 verifyList(ALLWORDS);

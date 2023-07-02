@@ -1,0 +1,23 @@
+#header{
+    display:flex;
+    justify-content: center;
+}
+
+#inputGrids {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+
+    grid-gap: 10px 25px;
+
+    height: 500px;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+#userInput {
+    margin-top: 5%;
+    display:flex;
+    justify-content: center;
+}
