@@ -105,7 +105,7 @@ const recursiveSearch = (xPos, yPos, grid, discoveredPaths) => {
 
             const position = newX + " " + newY;
 
-            if (!t_discovered.includes(position) && t_discovered.length < 3) {
+            if (!t_discovered.includes(position) && t_discovered.length < 6) {
                 
                 t_discovered.push (position);
 
@@ -153,6 +153,7 @@ const fileToArr = () => {
 };
 
 const DICTIONARY = fileToArr();
+
 const grid = initGrid(GRID_SIZE);
 printGrid(grid);
 
