@@ -1,5 +1,6 @@
-// import {readFileSync, promises as fsPromises} from 'fs';
-const {promises: fsPromises} = require('fs');
+
+const f = require('fs');
+const readline = require('readline');
 
 const GRID_SIZE = 4;
 const ALPHABET = [
@@ -40,7 +41,7 @@ const DIRECTION = [
     [0, -1],
     [-1, -1]
   ];
-const allWords = [];
+const ALLWORDS = [];
 
 const initGrid = (gridSize) => {
 
@@ -107,7 +108,9 @@ const recursiveSearch = (xPos, yPos, grid, discoveredPaths) => {
             if (!t_discovered.includes(position) && t_discovered.length < 3) {
                 
                 t_discovered.push (position);
-                allWords.push [getWord];
+
+                const word = getWord(t_discovered, grid);
+                ALLWORDS.push (word);
                 recursiveSearch(newX, newY, grid, t_discovered);
 
             }
@@ -124,34 +127,36 @@ const getWord = (path, grid) => {
 
     for (let i = 0; i < path.length; i ++) {
         const pos = path[i].split(" ");
-        word += grid[parseInt(pos[0])][parseInt(pos[1])];
+        const x = parseInt(pos[0]);
+        const y = parseInt(pos[1]);
+
+        word += grid[x][y];
     }
+
     return word;
 };
 
+const verifyList = (list) => {
 
-async function checkIfContainsAsync(str) {
-
-    filename = "./valid-wordle-words.txt";
-
-    try {
-      const contents = await fsPromises.readFile(filename, 'utf-8');
-  
-      const result = contents.includes(str);
-      console.log(result);
-  
-      return result;
-    } catch (err) {
-      console.log(err);
-      return false;
+    for (const words of list) {
+        if (DICTIONARY.includes(words) && words.length > 2) {
+            console.log(words);
+        } 
     }
+
 }
 
+const fileToArr = () => {
+    var text = f.readFileSync("./valid-wordle-words.txt", "utf-8");
+    let t_dic = text.split("\n"); //split automatically turns it into an array!
+    return t_dic;
+};
 
-
+const DICTIONARY = fileToArr();
 const grid = initGrid(GRID_SIZE);
 printGrid(grid);
+
 console.log ("---------");
 solveGrid(grid);
-
+verifyList(ALLWORDS);
 
