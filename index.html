@@ -2,14 +2,14 @@
 
 <html>
     <head>
-        <title>WORDLE SOLVER</title>
+        <title>WORD HUNT SOLVER</title>
         <link rel = "stylesheet" href = "style.css">
-
+        <script src="app.js" defer></script>
     </head>
     <body>
         	 
         <section id="header" >
-            <h2>WORDLE SOLVER</h2>
+            <h2>WORD HUNT SOLVER</h2>
         </section>
 
         <section id ="inputGrids">
@@ -21,8 +21,10 @@
                     var input = document.createElement("input");
                     input.setAttribute('type', 'text');
 
-                    //append the created element to the desired parent element
+                    const name = ("input" + i).toString();
+                    input.setAttribute('id', name);
 
+                    //append the created element to the desired parent element
                     var parent = document.getElementById("inputGrids");
                     parent.appendChild(input);
                 }
@@ -32,7 +34,7 @@
         </section>
         
         <section id="userInput"> 
-            <button type ="button">SUBMIT</button>
+            <button onclick ="initGrid()">SUBMIT</button>
         </section>
        
     </body>

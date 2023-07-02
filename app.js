@@ -1,34 +1,7 @@
+//const f = module.constructor._load('fs');
 
-const f = require('fs');
 const GRID_SIZE = 4;
-const ALPHABET = [
-    "a",
-    "b",
-    "c",
-    "d",
-    "e",
-    "f",
-    "g",
-    "h",
-    "i",
-    "j",
-    "k",
-    "l",
-    "m",
-    "n",
-    "o",
-    "p",
-    "q",
-    "r",
-    "s",
-    "t",
-    "u",
-    "v",
-    "w",
-    "x",
-    "y",
-    "z"
-]
+
 const DIRECTION = [
     [-1, 0],
     [-1, 1],
@@ -39,30 +12,31 @@ const DIRECTION = [
     [0, -1],
     [-1, -1]
   ];
+
 const ALLWORDS = [];
 
-const initGrid = (gridSize) => {
+function initGrid(){
 
-    const t_grid = [];
+    let t_grid = [];
+    let t_row = [];
 
-    for (let i = 0; i < gridSize; i ++) {
+    for (let i = 1; i <= GRID_SIZE*GRID_SIZE; i ++) {
 
-        const t_row = [];
+        const name = ("input" + (i-1)).toString();
+        t_row.push (document.getElementById(name).value);
 
-        for (let j = 0; j < gridSize; j ++) {
-            const randomKey = Math.floor (Math.random() * ALPHABET.length);
-            t_row.push(ALPHABET[randomKey]);
+        if (i % GRID_SIZE == 0) {
+            t_grid.push (t_row);
+            t_row = [];
         }
-
-        t_grid.push(t_row);
 
     }
 
-    return t_grid;
-};
+    printGrid(t_grid);
 
-const printGrid = (grid) => {
+}
 
+function printGrid (grid) {
     for (let i = 0; i < GRID_SIZE; i ++) {
 
         let rowString = "";
@@ -73,8 +47,8 @@ const printGrid = (grid) => {
 
         console.log (rowString);
     }
+}
 
-};
 
 const solveGrid = (grid) => {
 
@@ -145,15 +119,18 @@ const verifyList = (list) => {
 }
 
 const fileToArr = () => {
-    var text = f.readFileSync("./valid-wordle-words.txt", "utf-8");
-    let t_dic = text.split("\n"); //split automatically turns it into an array!
-    return t_dic;
+    //var text = f.readFileSync("./valid-wordle-words.txt", "utf-8");
+    //let t_dic = text.split("\n"); //split automatically turns it into an array!
+    //return t_dic;
 };
 
+
 const DICTIONARY = fileToArr();
+/*
 const grid = initGrid(GRID_SIZE);
 printGrid(grid);
 console.log ("---------");
 solveGrid(grid);
 verifyList(ALLWORDS);
+*/
 
