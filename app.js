@@ -1,5 +1,3 @@
-//const f = module.constructor._load('fs');
-
 const GRID_SIZE = 4;
 
 const DIRECTION = [
@@ -14,6 +12,8 @@ const DIRECTION = [
   ];
 
 const ALLWORDS = [];
+
+let DICTIONARY;
 
 function initGrid(){
 
@@ -33,7 +33,7 @@ function initGrid(){
     }
 
     printGrid(t_grid);
-
+    solveGrid(t_grid);
 }
 
 function printGrid (grid) {
@@ -49,7 +49,6 @@ function printGrid (grid) {
     }
 }
 
-
 const solveGrid = (grid) => {
 
     for (let i = 0; i < GRID_SIZE; i ++) {
@@ -60,7 +59,7 @@ const solveGrid = (grid) => {
         }
     }
 
-
+    verifyList (ALLWORDS);
 
 };
 
@@ -82,7 +81,11 @@ const recursiveSearch = (xPos, yPos, grid, discoveredPaths) => {
                 t_discovered.push (position);
 
                 const word = getWord(t_discovered, grid);
-                ALLWORDS.push (word);
+
+                if (!ALLWORDS.includes (word)) {
+                    ALLWORDS.push (word);
+                }
+
                 recursiveSearch(newX, newY, grid, t_discovered);
 
             }
@@ -111,26 +114,33 @@ const getWord = (path, grid) => {
 const verifyList = (list) => {
 
     for (const words of list) {
-        if (DICTIONARY.includes(words) && words.length > 2) {
-            console.log(words);
-        } 
+        
+        if (words.length > 2) {
+
+            if (DICTIONARY.includes(words)) {
+                //attach word to p tag
+                const para = document.createElement("p");
+                const node = document.createTextNode(words.toString());
+
+                para.appendChild(node);
+                const element = document.getElementById("wordsPossible");
+                element.appendChild(para);
+            } 
+
+        }
+
     }
 
 }
 
-const fileToArr = () => {
-    //var text = f.readFileSync("./valid-wordle-words.txt", "utf-8");
-    //let t_dic = text.split("\n"); //split automatically turns it into an array!
-    //return t_dic;
-};
+async function fileToArr() {
 
+    const response = await fetch('./valid-wordle-words.txt');
+    var data = await response.text();
 
-const DICTIONARY = fileToArr();
-/*
-const grid = initGrid(GRID_SIZE);
-printGrid(grid);
-console.log ("---------");
-solveGrid(grid);
-verifyList(ALLWORDS);
-*/
+    DICTIONARY = data.split("\n"); //split automatically turns it into an array!
+}
+
+fileToArr();
+
 
