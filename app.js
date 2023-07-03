@@ -11,7 +11,7 @@ const DIRECTION = [
     [-1, -1]
   ];
 
-const ALLWORDS = [];
+let ALLWORDS = [];
 
 let DICTIONARY;
 
@@ -50,6 +50,8 @@ function printGrid (grid) {
 }
 
 const solveGrid = (grid) => {
+
+    ALLWORDS = [];
 
     for (let i = 0; i < GRID_SIZE; i ++) {
         for (let j = 0; j < GRID_SIZE; j ++) {
