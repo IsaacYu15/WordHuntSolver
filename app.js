@@ -113,6 +113,13 @@ const getWord = (path, grid) => {
 
 const verifyList = (list) => {
 
+    const element = document.getElementById("wordsPossible");
+
+    //clear all previously add children
+    while (element.firstChild) {
+        element.removeChild(element.lastChild);
+    }
+
     for (const words of list) {
         
         if (words.length > 2) {
@@ -123,7 +130,6 @@ const verifyList = (list) => {
                 const node = document.createTextNode(words.toString());
 
                 para.appendChild(node);
-                const element = document.getElementById("wordsPossible");
                 element.appendChild(para);
             } 
 

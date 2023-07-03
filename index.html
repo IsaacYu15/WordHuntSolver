@@ -17,32 +17,30 @@
             <h2>WORD HUNT SOLVER</h2>
         </section>
 
-        <div id ="contents"> 
-    
-            <section id ="inputGrids">
+        <section id ="inputGrids">
                 
-                <!--Create 16 input fields-->
-                <script>
-    
-                    for (let i = 0; i < 16; i ++) {
-                        var input = document.createElement("input");
-                        input.setAttribute('type', 'text');
-    
-                        const name = ("input" + i).toString();
-                        input.setAttribute('id', name);
-                        input.placeholder = "____";
-    
-                        //append the created element to the desired parent element
-                        var parent = document.getElementById("inputGrids");
-                        parent.appendChild(input);
-                    }
-    
-                </script>
+            <!--Create 16 input fields-->
+            <script>
 
-                <button id="userInput" onclick ="initGrid()">SUBMIT</button>
-            </section>
+                for (let i = 0; i < 16; i ++) {
+                    var input = document.createElement("input");
+                    input.setAttribute('type', 'text');
 
-        </div>
+                    const name = ("input" + i).toString();
+                    input.setAttribute('id', name);
+                    input.placeholder = "____";
+
+                    //append the created element to the desired parent element
+                    var parent = document.getElementById("inputGrids");
+                    parent.appendChild(input);
+                }
+
+            </script>
+
+        </section>
+
+                                    
+        <button id="userInput" onclick ="initGrid()">SUBMIT</button>
         
         <section id="wordsPossible">
             <h2>WORDS POSSIBLE</h2>
