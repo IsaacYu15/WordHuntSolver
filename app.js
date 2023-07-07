@@ -23,7 +23,7 @@ function initGrid(){
     for (let i = 1; i <= GRID_SIZE*GRID_SIZE; i ++) {
 
         const name = ("input" + (i-1)).toString();
-        t_row.push (document.getElementById(name).value);
+        t_row.push (document.getElementById(name).value.toLowerCase());
 
         if (i % GRID_SIZE == 0) {
             t_grid.push (t_row);
