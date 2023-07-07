@@ -32,7 +32,7 @@ function initGrid(){
 
     }
 
-    printGrid(t_grid);
+    //printGrid(t_grid);
     solveGrid(t_grid);
 }
 
@@ -61,7 +61,19 @@ const solveGrid = (grid) => {
         }
     }
 
-    verifyList (ALLWORDS);
+    const t_list = [];
+    const t_paths = [];
+
+    for (const items of ALLWORDS) {
+
+        if (!t_list.includes(items[0])) {
+            t_list.push(items[0]);
+            t_paths.push(items[1]);
+        }
+
+    }
+
+    verifyList (t_list, t_paths);
 
 };
 
@@ -82,10 +94,13 @@ const recursiveSearch = (xPos, yPos, grid, discoveredPaths) => {
                 
                 t_discovered.push (position);
 
-                const word = getWord(t_discovered, grid);
+                const word = getInfo(t_discovered, grid);
 
                 if (!ALLWORDS.includes (word)) {
-                    ALLWORDS.push (word);
+                    let info = [];
+                    info.push(word);
+                    info.push(t_discovered);
+                    ALLWORDS.push (info);
                 }
 
                 recursiveSearch(newX, newY, grid, t_discovered);
@@ -99,7 +114,8 @@ const recursiveSearch = (xPos, yPos, grid, discoveredPaths) => {
 
 };
 
-const getWord = (path, grid) => {
+const getInfo = (path, grid) => {
+
     let word = "";
 
     for (let i = 0; i < path.length; i ++) {
@@ -113,7 +129,7 @@ const getWord = (path, grid) => {
     return word;
 };
 
-const verifyList = (list) => {
+const verifyList = (list, path) => {
 
     const element = document.getElementById("wordsPossible");
 
@@ -122,14 +138,15 @@ const verifyList = (list) => {
         element.removeChild(element.lastChild);
     }
 
-    for (const words of list) {
+    for (let [index, words] of list.entries() ) {
         
         if (words.length > 2) {
 
             if (DICTIONARY.includes(words)) {
-                //attach word to p tag
-                const para = document.createElement("p");
+                const para = document.createElement("button");
                 const node = document.createTextNode(words.toString());
+      
+                para.onclick = function(){showPath(path[index])};  
 
                 para.appendChild(node);
                 element.appendChild(para);
@@ -137,6 +154,35 @@ const verifyList = (list) => {
 
         }
 
+    }
+
+}
+
+const showPath =(element)=> {
+
+    //reset all borders
+    for (let i = 0; i < GRID_SIZE*GRID_SIZE; i++) {
+        const name = ("input" + (i)).toString();
+        const respectiveInputField = document.getElementById(name);
+        respectiveInputField.style.border = "none";
+    }
+
+    for (let i = 0; i < element.length; i ++) {
+
+
+        const pos = element[i].split(" ");
+        const x = parseInt(pos[0]);
+        const y = parseInt(pos[1]);
+
+        
+        const name = "input"+(4*x +y).toString();
+        const respectiveInputField = document.getElementById(name);
+
+        console.log(name);
+        console.log(respectiveInputField);
+
+        respectiveInputField.style.border = "thick solid rgb(255, 0, 0)";
+        
     }
 
 }
