@@ -182,8 +182,11 @@ const showPath =(element)=> {
         console.log(respectiveInputField);
 
         respectiveInputField.style.border = "thick solid rgb(255, 0, 0)";
-        
+  
     }
+
+          
+    window.scrollTo(0,0);
 
 }
 

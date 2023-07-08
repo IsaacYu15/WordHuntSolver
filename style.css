@@ -106,3 +106,10 @@ button:hover {
 
 }
 
+#wordsPossible {
+    margin:auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
