@@ -36,12 +36,28 @@
 
                                     
         <button id="userInput" onclick ="initGrid()">SUBMIT</button>
-        
+
+        <h2>WORDS POSSIBLE</h2>
+
         <div id ="displayResults">
-            <h2>WORDS POSSIBLE</h2>
-            <section id="wordsPossible">
-                
-            </section>
+
+            <!--Create 8 headers-->
+            <script>
+
+                for (let i = 0; i < 8; i ++) {
+                    var title = document.createElement("p");
+                    var txt = document.createTextNode(i + " letter words");
+
+                    const name = ("title" + i).toString();
+                    input.setAttribute('id', name);
+
+                    title.appendChild(txt);
+                    var parent = document.getElementById("displayResults");
+                    parent.appendChild(title);
+                }
+            
+            </script>
+
         </div>
 
        
