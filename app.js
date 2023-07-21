@@ -23,6 +23,7 @@ function initGrid(){
     for (let i = 1; i <= GRID_SIZE*GRID_SIZE; i ++) {
 
         const name = ("input" + (i-1)).toString();
+        console.log(name);
         t_row.push (document.getElementById(name).value.toLowerCase());
 
         if (i % GRID_SIZE == 0) {
@@ -131,12 +132,17 @@ const getInfo = (path, grid) => {
 
 const verifyList = (list, path) => {
 
-    const element = document.getElementById("wordsPossible");
+    for (let i = 3; i < 8; i ++) {
 
-    //clear all previously add children
-    while (element.firstChild) {
-        element.removeChild(element.lastChild);
+        const element = document.getElementById("title" + i);
+
+        while (element.childNodes.length > 1) {
+
+            element.removeChild(element.lastChild);
+
+        }
     }
+
 
     for (let [index, words] of list.entries() ) {
         
@@ -149,14 +155,24 @@ const verifyList = (list, path) => {
                 para.onclick = function(){showPath(path[index])};  
 
                 para.appendChild(node);
+
+                var wordLength = words.length;
+
+                if (wordLength > 7 ) {
+                    wordLength = 7;
+                }
+
+                const element = document.getElementById("title" + wordLength);
+
                 element.appendChild(para);
             } 
 
         }
 
     }
-
 }
+
+
 
 const showPath =(element)=> {
 
@@ -174,7 +190,6 @@ const showPath =(element)=> {
         const x = parseInt(pos[0]);
         const y = parseInt(pos[1]);
 
-        
         const name = "input"+(4*x +y).toString();
         const respectiveInputField = document.getElementById(name);
 

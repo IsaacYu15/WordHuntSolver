@@ -109,9 +109,30 @@ button:hover {
 }
 
 #wordsPossible {
-    margin:auto;
+
+    margin: 5% auto;
 
     display: flex;
+    text-align: center;
     flex-direction: column;
-    gap: 10px;
+}
+
+#displayResults {
+
+    display: flex;
+    flex-direction: row;
+
+}
+
+#displayResults p {
+
+    align-self: top;
+
+}
+
+#displayResults p button{
+    margin: auto;
+    margin-top: 20px;
+    vertical-align: top;
+
 }
