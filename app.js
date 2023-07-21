@@ -94,7 +94,9 @@ const recursiveSearch = (xPos, yPos, grid, discoveredPaths) => {
 
             const position = newX + " " + newY;
 
-            if (!t_discovered.includes(position) && t_discovered.length < 6) { //a temporary limiter so it doesn't search too much
+            //REMOVE TEMPORARY LIMTER SUCH THAT WE CAN KEEP SEARCHING FOR INIFINTE LENGTH AS LONG AS THE DICTIONARY CONTAINS IT
+            //create a possible list -> sub string, see if the path we are searching is still VALID in da dictionary
+            if (!t_discovered.includes(position) && t_discovered.length < 6) { 
                 
                 t_discovered.push (position);
 
