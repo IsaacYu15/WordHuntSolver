@@ -133,6 +133,7 @@ button:hover {
 #displayResults p button{
     margin: auto;
     margin-top: 20px;
-    vertical-align: top;
+    
+    padding: 10px;
 
 }

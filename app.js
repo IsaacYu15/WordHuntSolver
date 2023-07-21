@@ -31,6 +31,9 @@ function initGrid(){
             t_row = [];
         }
 
+        const respectiveInputField = document.getElementById(name);
+        respectiveInputField.style.border = "none";
+
     }
 
     //printGrid(t_grid);
