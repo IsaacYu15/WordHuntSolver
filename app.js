@@ -61,7 +61,7 @@ const solveGrid = (grid) => {
         for (let j = 0; j < GRID_SIZE; j ++) {
             const discoveredPaths = [];
             discoveredPaths.push (i + " " + j);
-            recursiveSearch (i, j, grid, discoveredPaths);
+            recursiveSearch (i, j, grid, discoveredPaths, DICTIONARY);
         }
     }
 
@@ -81,7 +81,7 @@ const solveGrid = (grid) => {
 
 };
 
-const recursiveSearch = (xPos, yPos, grid, discoveredPaths) => {
+const recursiveSearch = (xPos, yPos, grid, discoveredPaths, t_dic) => {
 
     //search in every single possible direction that will not cause repeated path
     for (let i = 0; i < DIRECTION.length; i ++) {        
@@ -94,22 +94,35 @@ const recursiveSearch = (xPos, yPos, grid, discoveredPaths) => {
 
             const position = newX + " " + newY;
 
-            //REMOVE TEMPORARY LIMTER SUCH THAT WE CAN KEEP SEARCHING FOR INIFINTE LENGTH AS LONG AS THE DICTIONARY CONTAINS IT
-            //create a possible list -> sub string, see if the path we are searching is still VALID in da dictionary
-            if (!t_discovered.includes(position) && t_discovered.length < 6) { 
+            if (!t_discovered.includes(position) ) { 
                 
                 t_discovered.push (position);
 
                 const word = getInfo(t_discovered, grid);
 
-                if (!ALLWORDS.includes (word)) {
-                    let info = [];
-                    info.push(word);
-                    info.push(t_discovered);
-                    ALLWORDS.push (info);
+                //only keep searching if the path we are on is 
+                const filt_t_dic = [];
+
+                for (let j = 0; j < t_dic.length; j ++) {
+                    
+                    if (t_dic[j].substring(0, t_discovered.length) == word) {
+                        filt_t_dic.push(t_dic[j]);
+                    }
+
+                    if(t_dic[j] == word &! ALLWORDS.includes(word)) {
+                        let info = [];
+                        info.push(word);
+                        info.push(t_discovered);
+                        ALLWORDS.push (info);
+                    }
                 }
 
-                recursiveSearch(newX, newY, grid, t_discovered);
+                //add to all words found
+                if (t_dic.length > 0) {
+                    recursiveSearch(newX, newY, grid, t_discovered, filt_t_dic);
+                }
+
+
 
             }
 
@@ -153,31 +166,26 @@ const verifyList = (list, path) => {
         
         if (words.length > 2) {
 
-            if (DICTIONARY.includes(words)) {
-                const para = document.createElement("button");
-                const node = document.createTextNode(words.toString());
+            const para = document.createElement("button");
+            const node = document.createTextNode(words.toString());
       
-                para.onclick = function(){showPath(path[index])};  
+            para.onclick = function(){showPath(path[index])};  
 
-                para.appendChild(node);
+            para.appendChild(node);
 
-                var wordLength = words.length;
+            var wordLength = words.length;
 
-                if (wordLength > 7 ) {
-                    wordLength = 7;
-                }
+            if (wordLength > 7 ) {
+                wordLength = 7;
+            }
 
-                const element = document.getElementById("title" + wordLength);
+            const element = document.getElementById("title" + wordLength);
 
-                element.appendChild(para);
-            } 
-
+            element.appendChild(para);
         }
 
     }
 }
-
-
 
 const showPath =(element)=> {
 
