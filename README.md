@@ -4,7 +4,7 @@ This project solves any word hunt / boggle grid using a recursive function. The 
 For the final product see [this video!](/NA)
  
 ## BUILT USING
-  Javascript
-  HTML
-  CSS
+  - Javascript
+  - HTML
+  - CSS
   
