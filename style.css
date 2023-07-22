@@ -82,7 +82,15 @@ button:hover {
 }
 
 #userInput{
-    margin: 25px auto auto auto;
+
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 5%;
+
+    margin-top: 2.5%;
 }
 
 #inputGrids {

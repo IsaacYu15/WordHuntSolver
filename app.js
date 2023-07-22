@@ -23,7 +23,6 @@ function initGrid(){
     for (let i = 1; i <= GRID_SIZE*GRID_SIZE; i ++) {
 
         const name = ("input" + (i-1)).toString();
-        //console.log(name);
         const inputValue = document.getElementById(name).value.toLowerCase();
 
         //catch all non letter values
@@ -35,7 +34,6 @@ function initGrid(){
             break;
         }
 
-
         if (i % GRID_SIZE == 0) {
             t_grid.push (t_row);
             t_row = [];
@@ -46,7 +44,7 @@ function initGrid(){
 
     }
 
-    //printGrid(t_grid);
+    //printGrid(t_grid); -> for debugging
     solveGrid(t_grid);
 }
 
@@ -63,6 +61,21 @@ function clearGrid(){
 
     }
 
+    clearVerfied();
+
+}
+
+function clearVerfied(){
+    for (let i = 3; i < 8; i ++) {
+
+        const element = document.getElementById("title" + i);
+
+        while (element.childNodes.length > 1) {
+
+            element.removeChild(element.lastChild);
+
+        }
+    }
 }
 
 function printGrid (grid) {
@@ -175,17 +188,7 @@ const getInfo = (path, grid) => {
 
 const verifyList = (list, path) => {
 
-    for (let i = 3; i < 8; i ++) {
-
-        const element = document.getElementById("title" + i);
-
-        while (element.childNodes.length > 1) {
-
-            element.removeChild(element.lastChild);
-
-        }
-    }
-
+    clearVerfied();
 
     for (let [index, words] of list.entries() ) {
         
@@ -210,6 +213,10 @@ const verifyList = (list, path) => {
         }
 
     }
+
+    document.getElementById("wordsPossible").scrollIntoView({
+        behavior: 'smooth'
+    });
 }
 
 const showPath =(element)=> {
@@ -221,8 +228,9 @@ const showPath =(element)=> {
         respectiveInputField.style.border = "none";
     }
 
-    for (let i = 0; i < element.length; i ++) {
+    let redMax = 255;
 
+    for (let i = 0; i < element.length; i ++) {
 
         const pos = element[i].split(" ");
         const x = parseInt(pos[0]);
@@ -231,15 +239,18 @@ const showPath =(element)=> {
         const name = "input"+(4*x +y).toString();
         const respectiveInputField = document.getElementById(name);
 
-        console.log(name);
-        console.log(respectiveInputField);
+        respectiveInputField.style.border = "thick solid rgb(" + redMax + ", 0, 0)";
 
-        respectiveInputField.style.border = "thick solid rgb(255, 0, 0)";
+        if (redMax > 25) {
+            redMax  = redMax - 25;
+        }
+
   
     }
 
-          
-    window.scrollTo(0,0);
+    document.getElementById("header").scrollIntoView({
+        behavior: 'smooth'
+    });
 
 }
 
@@ -251,6 +262,7 @@ async function fileToArr() {
     DICTIONARY = data.split("\n"); //split automatically turns it into an array!
 }
 
-fileToArr();
+//load the dictionary first
+fileToArr(); 
 
 
